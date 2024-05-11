@@ -29,7 +29,7 @@ def run_test(test_file):
     output_file = os.path.join(test_dir, f"{test_case}.out")
 
     # 编译源代码文件
-    compile_cmd = f"./build/crash {test_dir}{test_file} -S -o {test_case}.s 2>/dev/null && gcc {test_case}.s ./test/libsysy.a -static -o {test_case}"
+    compile_cmd = f"./build/crash {test_dir}{test_file} -S -o {test_case}.s 2>/dev/null && gcc -march=armv7-a -mfpu=vfp {test_case}.s ./test/libsysy.a -static -o {test_case}"
     print(compile_cmd)
     compile_process = subprocess.run(compile_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if compile_process.returncode != 0:
